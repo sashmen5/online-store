@@ -1,12 +1,32 @@
+import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
+import {Provider} from 'react-redux';
+import {Router, Route} from 'react-router';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import reducers from './reducers/index';
+import Layout from './components/Layout';
+import Phones from './components/Phones';
+debugger;
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const store = createStore(reducers, composeWithDevTools(
+    applyMiddleware(thunk)
+));
+
+const history = syncHistoryWithStore(browserHistory, store);
+
+ReactDOM.render(
+    <Provider store={store}>
+        <Router history={history}>
+            <Route component={Layout}>
+                <Route path='/' component={Phones}/>
+            </Route>
+        </Router>
+    </Provider>,
+    document.getElementById('root')
+);
