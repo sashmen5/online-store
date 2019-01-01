@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {fetchPhones} from '../../actions';
+
 
 class Phones extends Component {
 
@@ -15,4 +18,8 @@ class Phones extends Component {
   }
 }
 
-export default Phones;
+const mapDispathToProps = {
+  fetchPhones
+};
+
+export default connect(null, mapDispathToProps)(Phones);

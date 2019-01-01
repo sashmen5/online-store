@@ -12,7 +12,6 @@ import {Router, Route} from 'react-router';
 import reducers from './reducers/index';
 import Layout from './components/Layout';
 import Phones from './components/Phones';
-debugger;
 
 const store = createStore(reducers, composeWithDevTools(
     applyMiddleware(thunk)
