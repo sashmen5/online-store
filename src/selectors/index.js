@@ -7,3 +7,5 @@ export const getPhones = state => {
 
 	return phones;
 };
+
+export const getRenderedPhonesLenght = state => R.length(state.phonesPage.ids);
