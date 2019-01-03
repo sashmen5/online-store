@@ -15,7 +15,7 @@ export const loadMorePhones = async ({offset}) => {
 
 export const fetchPhoneById = async id => {
 	return new Promise((resolve) => {
-		const phone = R.find(R.propEq('id', id));
+		const phone = R.find(R.propEq('id', id), phones);
 		resolve(phone);
 	})
 };
