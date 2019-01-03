@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {fetchPhoneById} from "../../actions";
+import {fetchPhoneById, addPhoneToBasket} from "../../actions";
 import {getPhoneById} from "../../selectors";
 import * as R from "ramda";
+import BasketCard from "../BasketCard";
+import Link from "react-router/es/Link";
+
 
 
 class Phone extends Component {
@@ -55,8 +58,29 @@ class Phone extends Component {
 	}
 
 	renderSidebar() {
+		const {phone, addPhoneToBasket} = this.props;
 		return (
-			<div>Sidebar</div>
+			<div>
+				<p className="lead">Quick Shop</p>
+				<BasketCard/>
+				<div className="form-group">
+					<h1>{phone.name}</h1>
+					<h2>${phone.price}</h2>
+				</div>
+				<Link
+					to='/'
+					className='btn btn-info btn-block'
+				>
+					Back to store
+				</Link>
+				<button
+					type='button'
+					className='btn btn-success btn-block'
+					onClick={() => addPhoneToBasket(phone.id)}
+				>
+					Add to cart
+				</button>
+			</div>
 		)
 	}
 
@@ -84,7 +108,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-	fetchPhoneById
+	fetchPhoneById,
+	addPhoneToBasket
 };
 
 
