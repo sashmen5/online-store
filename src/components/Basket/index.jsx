@@ -1,13 +1,42 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {getTotalBasketPrice, getBasketPhonesWithCount} from "../../selectors";
+import {removePhoneFromBasket, basketCheckout, cleanBasket} from '../../actions';
 import * as R from "ramda";
+import {Link} from "react-router";
 
-const Basket = ({phones, totalPrice}) => {
+const Basket = ({phones, totalPrice, removePhoneFromBasket, basketCheckout, cleanBasket}) => {
     const isBasketEmpty = R.isEmpty(phones);
 
     const renderSidebar = () => (
-        <div>Sidebar</div>
+        <div>
+            <Link
+                to='/'
+                className='btn btn-info'
+            >
+                <span className='glyphicon glyphicon-info-sign'></span>
+                <span> Continue Shopping</span>
+            </Link>
+            {
+                R.not(isBasketEmpty) &&
+                <div>
+                    <button
+                        onClick={cleanBasket}
+                        className='btn btn-danger'
+                    >
+                        <span className='glyphicon glyphicon-trash'></span>
+                         <span> Clear cart</span>
+                    </button>
+                    <button
+                        onClick={() => basketCheckout(phones)}
+                        className='btn btn-danger'
+                    >
+                        <span className='glyphicon glyphicon-envelope'></span>
+                        <span> Checkout</span>
+                    </button>
+                </div>
+            }
+        </div>
     );
 
     const renderContent = () => (
@@ -33,7 +62,10 @@ const Basket = ({phones, totalPrice}) => {
                             <td>${phone.price}</td>
                             <td>{phone.count}</td>
                             <td>
-                                <span className='delete-cart'/>
+                                <span
+                                    className='delete-cart'
+                                    onClick={() => removePhoneFromBasket(phone.id)}
+                                />
                             </td>
                         </tr>
                     ))}
@@ -42,12 +74,12 @@ const Basket = ({phones, totalPrice}) => {
             </div>
             {
                 R.not(isBasketEmpty) &&
-                    <div className='row'>
-                        <div className="pull-right total-user-checkout">
-                            <b>Total:</b>
-                            ${totalPrice}
-                        </div>
+                <div className='row'>
+                    <div className="pull-right total-user-checkout">
+                        <b>Total:</b>
+                        ${totalPrice}
                     </div>
+                </div>
             }
         </div>
     );
@@ -73,4 +105,10 @@ const mapStateToProps = state => ({
     totalPrice: getTotalBasketPrice(state)
 });
 
-export default connect(mapStateToProps, null)(Basket);
+const mapDispatchToProps = {
+    removePhoneFromBasket,
+    cleanBasket,
+    basketCheckout
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Basket);

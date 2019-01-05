@@ -25,7 +25,12 @@ export const FETCH_PHONE_BY_ID_SUCCESS = 'FETCH_PHONE_BY_ID_SUCCESS';
 export const FETCH_PHONE_BY_ID_FAILURE = 'FETCH_PHONE_BY_ID_FAILURE';
 
 export const ADD_PHONE_TO_BASKET = 'ADD_PHONE_TO_BASKET';
+export const REMOVE_PHONE_FROM_BASKET = 'REMOVE_PHONE_FROM_BASKET';
 export const SEARCH_PHONE = 'SEARCH_PHONE';
+export const CLEAN_BASKET = 'CLEAN_BASKET';
+
+
+
 
 export const fetchPhones = () => async dispatch => {
 	dispatch({type: FETCH_PHONES_START});
@@ -113,4 +118,21 @@ export const searchPhone = text => dispatch => {
 		type: SEARCH_PHONE,
 		payload: text
 	})
+};
+
+export const removePhoneFromBasket = phoneId => dispatch => {
+	dispatch({
+		type: REMOVE_PHONE_FROM_BASKET,
+		payload: phoneId
+	})
+};
+
+export const cleanBasket = () => dispatch => {
+	dispatch({
+		type: CLEAN_BASKET
+	})
+};
+
+export const basketCheckout = phones => {
+	alert(JSON.stringify(phones));
 };
