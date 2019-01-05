@@ -20,6 +20,7 @@ export const FETCH_PHONE_BY_ID_SUCCESS = 'FETCH_PHONE_BY_ID_SUCCESS';
 export const FETCH_PHONE_BY_ID_FAILURE = 'FETCH_PHONE_BY_ID_FAILURE';
 
 export const ADD_PHONE_TO_BASKET = 'ADD_PHONE_TO_BASKET';
+export const SEARCH_PHONE = 'SEARCH_PHONE';
 
 export const fetchPhones = () => async dispatch => {
 	dispatch({type: FETCH_PHONES_START});
@@ -81,5 +82,12 @@ export const addPhoneToBasket = id => dispatch => {
 	dispatch({
 		type: ADD_PHONE_TO_BASKET,
 		payload: id
+	})
+};
+
+export const searchPhone = text => dispatch => {
+	dispatch({
+		type: SEARCH_PHONE,
+		payload: text
 	})
 };
