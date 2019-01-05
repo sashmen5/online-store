@@ -5,6 +5,8 @@ import {removePhoneFromBasket, basketCheckout, cleanBasket} from '../../actions'
 import * as R from "ramda";
 import {Link} from "react-router";
 
+// TODO: delete superagent library
+
 const Basket = ({phones, totalPrice, removePhoneFromBasket, basketCheckout, cleanBasket}) => {
     const isBasketEmpty = R.isEmpty(phones);
 
