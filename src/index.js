@@ -13,6 +13,7 @@ import reducers from './reducers/index';
 import Layout from './components/Layout';
 import Phones from './components/Phones';
 import Phone from './components/Phone';
+import Basket from "./components/Basket";
 
 const store = createStore(reducers, composeWithDevTools(
     applyMiddleware(thunk)
@@ -28,6 +29,7 @@ ReactDOM.render(
                 <Route path='categories/:id' component={Phones}/>
             </Route>
           	<Route path='phones/:id' component={Phone}/>
+          	<Route path='basket' component={Basket}/>
         </Router>
     </Provider>,
     document.getElementById('root')
