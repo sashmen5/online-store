@@ -1,5 +1,6 @@
 import {
 	fetchPhones as fetchPhonesApi,
+	fetchCatogories as fetchCategoriesApi,
 	loadMorePhones as loadMorePhonesApi,
 	fetchPhoneById as fetchPhoneByIdApi
 } from '../api';
@@ -10,6 +11,10 @@ import {getRenderedPhonesLenght} from "../selectors";
 export const FETCH_PHONES_START = 'FETCH_PHONES_START';
 export const FETCH_PHONES_SUCCESS = 'FETCH_PHONES_SUCCESS';
 export const FETCH_PHONES_FAILURE = 'FETCH_PHONES_FAILURE';
+
+export const FETCH_CATEGORIES_START = 'FETCH_CATEGORIES_START';
+export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
+export const FETCH_CATEGORIES_FAILURE = 'FETCH_CATEGORIES_FAILURE';
 
 export const LOAD_MORE_PHONES_START = 'LOAD_MORE_PHONES_START';
 export const LOAD_MORE_PHONES_SUCCESS = 'LOAD_MORE_PHONES_SUCCESS';
@@ -34,6 +39,24 @@ export const fetchPhones = () => async dispatch => {
 	} catch (err) {
 		dispatch({
 			type: FETCH_PHONES_FAILURE,
+			payload: err,
+			error: true
+		})
+	}
+};
+
+export const fetchCategories = () => async dispatch => {
+	dispatch({type: FETCH_CATEGORIES_START});
+
+	try {
+		const phones = await fetchCategoriesApi();
+		dispatch({
+			type: FETCH_CATEGORIES_SUCCESS,
+			payload: phones,
+		})
+	} catch (err) {
+		dispatch({
+			type: FETCH_CATEGORIES_FAILURE,
 			payload: err,
 			error: true
 		})

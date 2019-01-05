@@ -6,7 +6,7 @@ export const getPhones = state => {
 	// const phones = R.map(id => getPhoneById(state, id), state.phonesPage.ids);
 	// return phones;
 	const applySearch = item => R.contains(
-		state.phonesPage.search,
+		state.phonesPage.search.toLowerCase(),
 		R.prop('name', item)
 	);
 	const phones = R.compose(

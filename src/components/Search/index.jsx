@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
 import {searchPhone} from '../../actions';
-
+// TODO: implement searching onchange after every input
+// TODO: search lower case
 class Search extends Component {
     constructor(props) {
         super(props);
